@@ -1,4 +1,4 @@
-//3165. Maximum Sum of Subsequence With Non-adjacent Elements
+//3165. Maximum Sum of Subsequence With Non-adjacent Elemen
 #include <stdlib.h>
 
 #define MOD 1000000007LL
