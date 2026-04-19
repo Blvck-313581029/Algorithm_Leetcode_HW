@@ -1,7 +1,13 @@
 //1499. Max Value of Equation
 #include <limits.h>
 #include <stdlib.h>
-
+//yi-xi+yj+xj max(yi+xi)
+//xj-xi<=k
+//[[1,3],[2,0],[5,10],[6,-10]], k = 1
+// Base case / 最小輸入：O(1)
+// Best case：O(n)
+// Worst case：O(n)
+// Space：O(n)
 int findMaxValueOfEquation(int** points, int pointsSize, int* pointsColSize, int k) {
     // deque 裡面存的是 index
     int* deque = (int*)malloc(sizeof(int) * pointsSize);

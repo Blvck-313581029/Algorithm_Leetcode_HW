@@ -1,4 +1,7 @@
 //995. Minimum Number of K Consecutive Bit Flips
+// Base case / ³Ì¤p¿é¤J	O(1)
+// Best case	O(n)
+// Worst case	O(n)
 #include <stdlib.h>
 
 int minKBitFlips(int* nums, int numsSize, int k) {

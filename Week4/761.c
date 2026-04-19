@@ -1,4 +1,5 @@
 //761. Special Binary String
+//Worst Case: O(n2) Bestcase O(n log n) Base case O(1)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
