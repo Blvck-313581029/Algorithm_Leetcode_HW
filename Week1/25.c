@@ -1,4 +1,8 @@
-//25. Reverse Nodes in k-Group
+//25. Reverse Nodes in k-
+// Base case: O(1)
+// Best case: O(n)
+// Worst case: O(n)
+// Space: O(1)
 struct ListNode* reverseKGroup(struct ListNode* head, int k) {
     if (!head || k == 1) return head;
     
@@ -7,16 +11,15 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
     struct ListNode *groupPrev = &dummy;
     
     while (true) {
-        // æ‰¾ç¬¬ k å€‹ç¯€é»ž
+        // §ä²Ä k ­Ó¸`ÂI
         struct ListNode* kth = groupPrev;
         for (int i = 0; i < k && kth; i++) kth = kth->next;
-        if (!kth) break; // ä¸å¤  k å€‹ï¼ŒçµæŸ
+        if (!kth) break; // ¤£°÷ k ­Ó¡Aµ²§ô
         
-        struct ListNode* groupNext = kth->next;
-        struct ListNode* prev = groupNext; // è®“åŽŸæœ¬çš„é¦–ç¯€é»žç¿»è½‰å¾ŒæŒ‡å‘ä¸‹ä¸€çµ„çš„é ­
+        struct ListNode* prev = kth->next;; // Åý­ì¥»ªº­º¸`ÂIÂ½Âà«á«ü¦V¤U¤@²ÕªºÀY
         struct ListNode* curr = groupPrev->next;
         
-        // ç¿»è½‰é€™çµ„å…§éƒ¨çš„æŒ‡æ¨™
+        // Â½Âà³o²Õ¤º³¡ªº«ü¼Ð
         for (int i = 0; i < k; i++) {
             struct ListNode* tmp = curr->next;
             curr->next = prev;
@@ -24,7 +27,8 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
             curr = tmp;
         }
         
-        // å°‡ä¸Šä¸€çµ„çš„çµå°¾æŒ‡å‘é€™ä¸€çµ„ç¿»è½‰å¾Œçš„æ–°é–‹é ­
+        // ±N¤W¤@²Õªºµ²§À«ü¦V³o¤@²ÕÂ½Âà«áªº·s¶}ÀY
+        //dummy->2 groupPrev=1
         struct ListNode* temp = groupPrev->next;
         groupPrev->next = kth;
         groupPrev = temp;

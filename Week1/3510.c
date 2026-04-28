@@ -1,4 +1,11 @@
 //3510. Minimum Pair Removal to Sort Array II
+//Min heap + link_list
+// Base case: numsSize <= 1¡Aª½±µ¦^¶Ç 0
+// Base case time: O(1)
+// Best case: O(n log n)
+// Worst case: O(n log n)
+// Space: O(n)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -84,7 +91,7 @@ int minimumPairRemoval(int* nums, int numsSize) {
 
     for (int i = 0; i < numsSize - 1; i++) {
         if (is_bad(nodes, i)) violations++;
-        HeapNode hn = {(long long)nums[i] + nums[i+1], i, 0, i+1, 0};
+        HeapNode hn = {(long long)nums[i] + nums[i+1], i, 0, i+1, 0};//
         heap_push(&h, hn);
     }
 
@@ -93,7 +100,7 @@ int minimumPairRemoval(int* nums, int numsSize) {
         HeapNode top = heap_pop(&h);
         int L = top.left_idx, R = top.r_idx;
 
-        // 1. æª¢æŸ¥å°è±¡æ˜¯å¦ä»ç„¶æœ‰æ•ˆ
+        // 1. ÀË¬d¹ï¶H¬O§_¤´µM¦³®Ä
         if (!nodes[L].active || !nodes[R].active || 
             nodes[L].version != top.l_ver || nodes[R].version != top.r_ver ||
             nodes[L].next != R) continue;
@@ -101,28 +108,28 @@ int minimumPairRemoval(int* nums, int numsSize) {
         int LL = nodes[L].prev;
         int RR = nodes[R].next;
 
-        // 2. ç§»é™¤åˆä½µå‰å—å½±éŸ¿çš„é•è¦è¨ˆæ•¸
+        // 2. ²¾°£¦X¨Ö«e¨ü¼vÅTªº¹H³W­p¼Æ
         if (is_bad(nodes, LL)) violations--;
         if (is_bad(nodes, L)) violations--;
         if (is_bad(nodes, R)) violations--;
 
-        // 3. åŸ·è¡Œåˆä½µ
+        // 3. °õ¦æ¦X¨Ö
         nodes[L].val += nodes[R].val;
         nodes[L].next = RR;
-        nodes[L].version++; // åªæœ‰ä¿®æ”¹å€¼çš„ L éœ€è¦å¢žåŠ ç‰ˆæœ¬
+        nodes[L].version++; // ¥u¦³­×§ï­Èªº L »Ý­n¼W¥[ª©¥»
         nodes[R].active = false;
         if (RR != -1) nodes[RR].prev = L; 
-        // æ³¨æ„ï¼šé€™è£¡ä¸å¯å¢žåŠ  nodes[RR].versionï¼Œå› ç‚º RR çš„å€¼æ²’è®Š
+        // ª`·N¡G³o¸Ì¤£¥i¼W¥[ nodes[RR].version¡A¦]¬° RR ªº­È¨SÅÜ
         
         ops++;
 
-        // 4. æ›´æ–°é•è¦è¨ˆæ•¸
+        // 4. §ó·s¹H³W­p¼Æ
         if (is_bad(nodes, LL)) violations++;
         if (is_bad(nodes, L)) violations++;
 
         if (violations == 0) break;
 
-        // 5. å°‡æ–°ç”¢ç”Ÿçš„å°åŠ å…¥å †ç©
+        // 5. ±N·s²£¥Íªº¹ï¥[¤J°ï¿n
         if (LL != -1) {
             HeapNode hn = {nodes[LL].val + nodes[L].val, LL, nodes[LL].version, L, nodes[L].version};
             heap_push(&h, hn);

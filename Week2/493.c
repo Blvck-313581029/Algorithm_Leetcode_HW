@@ -1,11 +1,16 @@
 //493. Reverse Pairs
+//merge sort + array
+// Base case time: O(1)
+// Best case: O(n log n)
+// Worst case: O(n log n)
+// Space: O(n)
 #include <stdlib.h>
 
-// å„ªåŒ–é»ï¼šå‚³å…¥è¼”åŠ©ç©ºé–“ tempï¼Œé¿å…åœ¨éæ­¸ä¸­åè¦† malloc
+// Àu¤ÆÂI¡G¶Ç¤J»²§UªÅ¶¡ temp¡AÁ×§K¦b»¼Âk¤¤¤ÏÂĞ malloc
 long long mergeAndCount(int* nums, int* temp, int left, int mid, int right) {
     long long count = 0;
     
-    // 1. è¨ˆç®— Reverse Pairs (ç¶­æŒä¸è®Šï¼Œé€™æ­¥æ˜¯ O(n))
+    // 1. ­pºâ Reverse Pairs (ºû«ù¤£ÅÜ¡A³o¨B¬O O(n))
     int j = mid + 1;
     for (int i = left; i <= mid; i++) {
         while (j <= right && (long long)nums[i] > 2 * (long long)nums[j]) {
@@ -14,7 +19,7 @@ long long mergeAndCount(int* nums, int* temp, int left, int mid, int right) {
         count += (j - (mid + 1));
     }
 
-    // 2. åˆä½µéç¨‹ï¼šä½¿ç”¨ temp æ•¸çµ„æ¸›å°‘åˆ†é…é–‹éŠ·
+    // 2. ¦X¨Ö¹Lµ{¡G¨Ï¥Î temp ¼Æ²Õ´î¤Ö¤À°t¶}¾P
     int i = left;
     int k = left;
     int right_start = mid + 1;
@@ -30,7 +35,7 @@ long long mergeAndCount(int* nums, int* temp, int left, int mid, int right) {
     while (p1 <= mid) temp[k++] = nums[p1++];
     while (p2 <= right) temp[k++] = nums[p2++];
 
-    // å°‡åˆä½µå¾Œçš„çµæœè€ƒå›åŸæ•¸çµ„
+    // ±N¦X¨Ö«áªºµ²ªG¦Ò¦^­ì¼Æ²Õ
     for (i = left; i <= right; i++) {
         nums[i] = temp[i];
     }
@@ -40,7 +45,7 @@ long long mergeAndCount(int* nums, int* temp, int left, int mid, int right) {
 
 long long solve(int* nums, int* temp, int left, int right) {
     if (left >= right) return 0;
-    int mid = left + (right - left) / 2;
+    int mid = left + (right - left) / 2;//(l+R)2
     
     long long count = solve(nums, temp, left, mid);
     count += solve(nums, temp, mid + 1, right);
@@ -52,7 +57,7 @@ long long solve(int* nums, int* temp, int left, int right) {
 int reversePairs(int* nums, int numsSize) {
     if (numsSize < 2) return 0;
     
-    // åœ¨é€™è£¡ä¸€æ¬¡æ€§åˆ†é…è¼”åŠ©ç©ºé–“
+    // ¦b³o¸Ì¤@¦¸©Ê¤À°t»²§UªÅ¶¡
     int* temp = (int*)malloc(sizeof(int) * numsSize);
     long long result = solve(nums, temp, 0, numsSize - 1);
     free(temp);

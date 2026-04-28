@@ -1,8 +1,11 @@
 //23. Merge k Sorted Lists
 #include <stdlib.h>
-
-
-// 輔助函數：合併兩個已排序的鏈結串列 (Easy 級別經典題)
+// mergesort(linklist)
+// Base case: listsSize == 0�A�����^�� NULL
+// Base case time: O(1)
+// Best case: O(N log k)
+// Worst case: O(N log k)
+// Space: O(log k)
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
     if (!l1) return l2;
     if (!l2) return l1;
