@@ -1,4 +1,9 @@
 //630. Course Schedule III
+//Base Case:Time  = O(1)   // n = 0 時 Space = O(n)
+
+//Best Case: Time  = O(n log n) Space = O(n)
+
+//Worst Case: Time  = O(n log n) Space = O(n)
 #include <stdlib.h>
 
 int cmp(const void* a, const void* b) {
